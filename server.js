@@ -43,3 +43,15 @@ app.get('/api/schedules', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+// Add this to store schedules (in a real app, you'd use a database)
+let schedules = [];
+
+// Update your schedules routes
+app.get('/api/schedules', (req, res) => {
+  res.json(schedules);
+});
+
+app.post('/api/schedules', (req, res) => {
+  schedules = req.body.schedules || [];
+  res.json({ message: 'Schedules saved successfully', schedules });
+});
