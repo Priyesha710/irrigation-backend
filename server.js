@@ -2,14 +2,14 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sqlite3 = require('sqlite3');
+
 
 // Add this to store schedules (in a real app, you'd use a database)
-let schedules = new sqlite3.Database(":memory:",(err)=>{if(err){console.log("Error Occurred - " + err.message);}else{console.log("Database Connected");}})
-
+schedules = [];
 // Middleware
 app.use(cors());
 app.use(express.json());
