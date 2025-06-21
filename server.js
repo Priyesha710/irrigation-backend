@@ -5,6 +5,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const sqlite3 = require('sqlite3');
+
+// Add this to store schedules (in a real app, you'd use a database)
+let schedules = new sqlite3.Database(":memory:",(err)=>{if(err){console.log("Error Occurred - " + err.message);}else{console.log("Database Connected");}})
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -43,8 +48,7 @@ app.get('/api/schedules', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
-// Add this to store schedules (in a real app, you'd use a database)
-let schedules = [];
+
 
 // Update your schedules routes
 app.get('/api/schedules', (req, res) => {
